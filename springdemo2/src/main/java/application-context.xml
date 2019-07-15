@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+      <!--   <bean id="employeeService" class="com.sapient.springdemo2.service.EmployeeServiceImpl">
+        	<constructor-arg ref="employeeDAO"></constructor-arg>
+      	</bean>
+      	<bean id="employeeDAO" class="com.sapient.springdemo2.dao.EmployeeDAOImpl"></bean> -->
+      <aop:aspectj-autoproxy />
+      <context:component-scan base-package="com.sapient.springdemo2"/>
+    
+    <bean id="employeeDAO" class="com.sapient.springdemo2.dao.MySQLEmployeeDAOImpl">
+    <constructor-arg ref="jdbcTemplate"></constructor-arg>
+    </bean>  
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+	<property name="dataSource" ref="ds"></property>  
+	</bean>  
+	
+	<bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+	<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+	<property name="url" value="jdbc:mysql://localhost:3306/employee" />  
+	<property name="username" value="root" />  
+	<property name="password" value="Sapient123" />  
+	</bean>
+</beans>
